@@ -29,7 +29,7 @@ namespace AulaWebDev.Infra.Mapeamentos
                 .HasForeignKey(x => x.ClienteId);
 
             builder.HasData(
-                new Cliente("Jhon Doe", "01102203344", "jhon.doe@email.com")
+                new Cliente(Guid.NewGuid(), "Jhon Doe", "01102203344", "jhon.doe@email.com")
             );
         }
 
