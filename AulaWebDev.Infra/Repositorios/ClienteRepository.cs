@@ -66,7 +66,7 @@ namespace AulaWebDev.Infra.Repositorios
             return await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Id == clienteId);
         }
 
-        public async Task<ICollection<Cliente>> ObterTodosClientes()
+        public async Task<ICollection<Cliente>> ObterTodosClientesAsync()
         {
             return await _dbContext.Clientes.ToListAsync();
         }

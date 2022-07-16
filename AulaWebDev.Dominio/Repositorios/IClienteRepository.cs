@@ -8,6 +8,6 @@ namespace AulaWebDev.Dominio.Repositorios
         Task<bool> DeletarAsync(Cliente cliente);
         Task<bool> EditarAsync(Cliente cliente);
         Task<Cliente?> ObterClientePorId(Guid clienteId);
-        Task<ICollection<Cliente>> ObterTodosClientes();
+        Task<ICollection<Cliente>> ObterTodosClientesAsync();
     }
 }
