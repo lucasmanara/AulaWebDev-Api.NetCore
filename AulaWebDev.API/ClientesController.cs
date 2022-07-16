@@ -1,5 +1,4 @@
 ﻿using AulaWebDev.Aplicacao.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AulaWebDev.API

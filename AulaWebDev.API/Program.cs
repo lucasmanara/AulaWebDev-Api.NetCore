@@ -21,6 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+app.MapControllers();
 
 //app.MapGet("/", () => "Hello World!");
 
