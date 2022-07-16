@@ -7,7 +7,9 @@ namespace AulaWebDev.Dominio.Validacoes
     {
         public ClienteDtoValidator()
         {
-
+            ValidarNome();
+            ValidarDocumento();
+            ValidarEmail();
         }
 
         private void ValidarNome()
