@@ -1,6 +1,7 @@
 ﻿using AulaWebDev.Dominio.Entidades;
 using AulaWebDev.Dominio.Repositorios;
 using AulaWebDev.Infra.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace AulaWebDev.Infra.Repositorios
@@ -16,29 +17,58 @@ namespace AulaWebDev.Infra.Repositorios
             _logger = logger;
         }
 
-        public Task<Cliente> CriarAsync(Cliente cliente)
+        public async Task<Cliente> CriarAsync(Cliente cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Add(cliente);
+                await _dbContext.SaveChangesAsync();
+                return cliente;
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return cliente;
+            }
         }
 
-        public Task<bool> DeletarAsync(Cliente cliente)
+        public async Task<bool> DeletarAsync(Cliente cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Remove(cliente);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return false;
+            }
         }
 
-        public Task<bool> EditarAsync(Cliente cliente)
+        public async Task<bool> EditarAsync(Cliente cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Update(cliente);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return false;
+            }
         }
 
-        public Task<Cliente?> ObterClientePorId(Guid clienteId)
+        public async Task<Cliente> ObterClientePorId(Guid clienteId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Id == clienteId);
         }
 
-        public Task<ICollection<Cliente>> ObterTodosClientes()
+        public async Task<ICollection<Cliente>> ObterTodosClientes()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clientes.ToListAsync();
         }
     }
 }

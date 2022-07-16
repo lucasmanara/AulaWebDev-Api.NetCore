@@ -1,11 +1,8 @@
-﻿using AulaWebDev.Infra.Context;
+﻿using AulaWebDev.Dominio.Repositorios;
+using AulaWebDev.Infra.Context;
+using AulaWebDev.Infra.Repositorios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AulaWebDev.Infra.Dependencias
 {
@@ -15,6 +12,8 @@ namespace AulaWebDev.Infra.Dependencias
         {
             var connectionString = configuration.GetConnectionString("SqliteConnectionString");
             services.AddSqlite<AulaWebDevDbContext>(connectionString);
+
+            services.AddScoped<IClienteRepository, ClienteRepository>();
 
             return services;
         }
