@@ -1,36 +1,39 @@
-﻿//using AulaWebDev.Dominio.Entidades;
-//using Microsoft.EntityFrameworkCore;
+﻿using AulaWebDev.Dominio.Entidades;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-//namespace AulaWebDev.Infra.Mapeamentos
-//{
-//    public class ProdutoMapeamento : IEntityTypeConfiguration<Produto>
-//    {
-//        public void Configure(EntityTypeBuilder<Cliente> builder)
-//        {
-//            builder.ToTable("Client");
+namespace AulaWebDev.Infra.Mapeamentos
+{
+    public class ProdutoMapeamento : IEntityTypeConfiguration<Produto>
+    {
+        public void Configure(EntityTypeBuilder<Produto> builder)
+        {
+            builder.ToTable("Product");
 
-//            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);
 
-//            builder.Property(x => x.Documento)
-//                .HasColumnName("Document")
-//                .IsRequired();
+            builder.Property(c => c.Descricao)
+                .HasColumnName("Description")
+                .HasMaxLength(100)
+                .IsRequired();
 
-//            builder.Property(x => x.Email)
-//                .HasColumnName("email")
-//                .IsRequired();
+            builder.Property(c => c.Codigo)
+                .HasColumnName("Code")
+                .IsRequired();
 
-//            builder.Property(x => x.Nome)
-//                .HasColumnName("name")
-//                .IsRequired();
+            builder.Property(c => c.Valor)
+                .HasColumnName("Price")
+                .HasPrecision(10, 2)
+                .IsRequired();
 
-//            builder.HasMany(x => x.Pedidos)
-//                .WithOne(x => x.Cliente)
-//                .HasForeignKey(x => x.ClienteId);
+            builder.Property(c => c.QuantidadeEstoque)
+                .HasColumnName("Stock")
+                .IsRequired();
 
-//            builder.HasData(
-//                new Cliente("Jhon Doe", "01102203344", "jhon.doe@email.com")
-//            );
-//        }
+            builder.HasMany(c => c.Pedidos)
+                .WithOne(c => c.Produto)
+                .HasForeignKey(c => c.ProdutoId);
+        }
 
-//    }
-//}
+    }
+}
