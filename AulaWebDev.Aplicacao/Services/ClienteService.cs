@@ -53,12 +53,31 @@ namespace AulaWebDev.Aplicacao.Services
 
         public async Task<ResultService> DeletarAsync(Guid clienteId)
         {
-            throw new NotImplementedException();
+            if (clienteId == Guid.Empty)
+                return ResultService.Fail<ClienteDto>("Id do cliente deve ser informado");
+
+            var cliente = await _clienteRepository.ObterClientePorId(clienteId);
+            if (cliente == null)
+                return ResultService.Fail("Cliente nao encontrado");
+
+            if (await _clienteRepository.DeletarAsync(cliente))
+                return ResultService.Ok("Cliente removido com sucesso");
+
+            return ResultService.Fail("Ocorreu um erro ao remover o Cliente");
         }
 
         public async Task<ResultService<ClienteDto>> ObterPorIdAsync(Guid clienteId)
         {
-            throw new NotImplementedException();
+            if (clienteId == Guid.Empty)
+                return ResultService.Fail<ClienteDto>("Id do cliente deve ser informado");
+
+            var cliente = await _clienteRepository.ObterClientePorId(clienteId);
+            if (cliente == null)
+                return ResultService.Fail<ClienteDto>("Cliente nao encontrado");
+
+            var clienteDto = _mapper.Map<ClienteDto>(cliente);
+
+            return ResultService.Ok(clienteDto);
         }
 
         public async Task<ResultService<ICollection<ClienteDto>>> ObterTodosAsync()

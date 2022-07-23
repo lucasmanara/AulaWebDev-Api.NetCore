@@ -27,6 +27,18 @@ namespace AulaWebDev.API
             return BadRequest(result);
         }
 
+        [HttpGet, Route("{clienteId}")]
+        public async Task<IActionResult> GetAsync(Guid clienteId)
+        {
+            var result = await _clienteService.ObterPorIdAsync(clienteId);
+            if (result.Sucesso)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ClienteDto clienteDto)
         {
@@ -43,6 +55,17 @@ namespace AulaWebDev.API
         {
             clienteDto.Id = clienteId;
             var result = await _clienteService.AlterarAsync(clienteDto);
+
+            if (result.Sucesso)
+                return Ok(result);
+
+            return BadRequest(result);
+        }
+
+        [HttpDelete, Route("{clienteId}")]
+        public async Task<IActionResult> DeleteAsync(Guid clienteId)
+        {
+            var result = await _clienteService.DeletarAsync(clienteId);
 
             if (result.Sucesso)
                 return Ok(result);
