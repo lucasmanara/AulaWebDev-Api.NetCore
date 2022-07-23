@@ -32,7 +32,6 @@ namespace AulaWebDev.Dominio.Validacoes
                 .WithMessage("O CPF Deve ser valido!");
         }
 
-
         private void ValidarEmail()
         {
             RuleFor(x => x.Email)
