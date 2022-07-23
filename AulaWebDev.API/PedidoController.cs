@@ -15,10 +15,45 @@ namespace AulaWebDev.API
             _pedidoService = pedidoService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var result = await _pedidoService.ObterTodosAsync();
+            if (result.Sucesso)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet, Route("{pedidoId}")]
+        public async Task<IActionResult> GetAsync(Guid pedidoId)
+        {
+            var result = await _pedidoService.ObterPorIdAsync(pedidoId);
+            if (result.Sucesso)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] PedidoDto pedidoDto)
         {
             var result = await _pedidoService.CriarAsync(pedidoDto);
+
+            if (result.Sucesso)
+                return Ok(result);
+
+            return BadRequest(result);
+        }
+
+        [HttpDelete, Route("{pedidoId}")]
+        public async Task<IActionResult> DeleteAsync(Guid pedidoId)
+        {
+            var result = await _pedidoService.DeletarAsync(pedidoId);
 
             if (result.Sucesso)
                 return Ok(result);

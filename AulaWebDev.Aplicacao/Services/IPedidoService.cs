@@ -6,7 +6,7 @@ namespace AulaWebDev.Aplicacao.Services
     {
         Task<ResultService<PedidoResponseDto>> CriarAsync(PedidoDto pedidoDto);
         Task<ResultService<ICollection<PedidoResponseDto>>> ObterTodosAsync();
-        Task<ResultService<PedidoResponseDto>> ObterPorIdAsync();
+        Task<ResultService<PedidoResponseDto>> ObterPorIdAsync(Guid pedidoId);
         Task<ResultService> DeletarAsync(Guid pedidoId);
     }
 }

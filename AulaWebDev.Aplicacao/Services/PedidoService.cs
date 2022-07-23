@@ -54,17 +54,36 @@ namespace AulaWebDev.Aplicacao.Services
 
         public async Task<ResultService> DeletarAsync(Guid pedidoId)
         {
-            throw new NotImplementedException();
+            if (pedidoId == Guid.Empty)
+                return ResultService.Fail<PedidoResponseDto>("Id deve ser informado");
+
+            var pedido = await _pedidoRepository.ObterPorIdAsync(pedidoId);
+            if (pedido == null)
+                return ResultService.Fail<PedidoResponseDto>("Pedido não encontrado");
+
+            if (await _pedidoRepository.DeletarAsync(pedido))
+                return ResultService.Ok("Pedido removido com sucesso");
+
+            return ResultService.Fail<PedidoResponseDto>("Ocorreu um erro ao remover pedido");
         }
 
-        public async Task<ResultService<PedidoResponseDto>> ObterPorIdAsync()
+        public async Task<ResultService<PedidoResponseDto>> ObterPorIdAsync(Guid pedidoId)
         {
-            throw new NotImplementedException();
+            if (pedidoId == Guid.Empty)
+                return ResultService.Fail<PedidoResponseDto>("Id deve ser informado");
+
+            var pedido = await _pedidoRepository.ObterPorIdAsync(pedidoId);
+            if (pedido == null)
+                return ResultService.Fail<PedidoResponseDto>("Pedido não encontrado");
+
+            var pedidoMapeado = _mapper.Map<PedidoResponseDto>(pedido);
+            return ResultService.Ok(pedidoMapeado);
         }
 
         public async Task<ResultService<ICollection<PedidoResponseDto>>> ObterTodosAsync()
         {
-            throw new NotImplementedException();
+            var pedidos = await _pedidoRepository.ObterTodosAsync();
+            return ResultService.Ok(_mapper.Map<ICollection<PedidoResponseDto>>(pedidos));
         }
     }
 }
