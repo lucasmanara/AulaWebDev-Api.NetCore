@@ -16,6 +16,7 @@ namespace AulaWebDev.Infra.Dependencias
             services.AddSqlite<AulaWebDevDbContext>(connectionString);
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             return services;
         }

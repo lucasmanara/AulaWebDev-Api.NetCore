@@ -30,7 +30,10 @@ namespace AulaWebDev.Aplicacao.Services
             if (cliente == null)
                 return ResultService.Fail("Cliente nao encontrado");
 
-            if (await _clienteRepository.EditarAsync(_mapper.Map(clienteDto, cliente)))
+            //Mapeando propriedades informadas para edição, na entidade ja existente no banco!
+            var clienteAtualizado = _mapper.Map(clienteDto, cliente);
+
+            if (await _clienteRepository.EditarAsync(clienteAtualizado))
                 return ResultService.Ok("Cliente editado com sucesso");
 
             return ResultService.Fail("Ocorreu um erro ao editar o Cliente");

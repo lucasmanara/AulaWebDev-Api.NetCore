@@ -70,5 +70,6 @@ namespace AulaWebDev.Infra.Repositorios
         {
             return await _dbContext.Clientes.ToListAsync();
         }
+
     }
 }

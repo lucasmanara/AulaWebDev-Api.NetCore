@@ -9,6 +9,7 @@ namespace AulaWebDev.Dominio.Mapeamentos
         public DtoParaEntidadeMapping()
         {
             CreateMap<ClienteDto, Cliente>();
+            CreateMap<ProdutoDto, Produto>();
         }
     }
 }
