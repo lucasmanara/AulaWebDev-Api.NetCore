@@ -1,4 +1,5 @@
 ﻿using AulaWebDev.Aplicacao.Services;
+using AulaWebDev.Dominio.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AulaWebDev.API
@@ -22,6 +23,29 @@ namespace AulaWebDev.API
             {
                 return Ok(result);
             }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] ClienteDto clienteDto)
+        {
+            var result = await _clienteService.CriarAsync(clienteDto);
+
+            if(result.Sucesso)
+                return Ok(result);
+
+            return BadRequest(result);
+        }
+
+        [HttpPut, Route("{clienteId}")]
+        public async Task<IActionResult> PutAsync(Guid clienteId, [FromBody] ClienteDto clienteDto)
+        {
+            clienteDto.Id = clienteId;
+            var result = await _clienteService.AlterarAsync(clienteDto);
+
+            if (result.Sucesso)
+                return Ok(result);
 
             return BadRequest(result);
         }
