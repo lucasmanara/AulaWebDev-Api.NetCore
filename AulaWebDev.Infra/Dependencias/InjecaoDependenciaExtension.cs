@@ -27,6 +27,7 @@ namespace AulaWebDev.Infra.Dependencias
             services.AddAutoMapper(typeof(EntidadeParaDtoMapping));
 
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             return services;
         }

@@ -47,7 +47,7 @@ namespace AulaWebDev.Aplicacao.Services
             return ResultService.Fail("Ocorreu um erro ao remover o Produto");
         }
 
-        public async Task<ResultService> EditarAsync(ProdutoDto produtoDto)
+        public async Task<ResultService> AlterarAsync(ProdutoDto produtoDto)
         {
             if (produtoDto.Id == Guid.Empty)
                 return ResultService.Fail<ProdutoDto>("ID precisa ser informado");
