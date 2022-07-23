@@ -61,9 +61,14 @@ namespace AulaWebDev.Infra.Repositorios
             }
         }
 
-        public async Task<Cliente?> ObterClientePorId(Guid clienteId)
+        public async Task<Cliente?> ObterClientePorIdAsync(Guid clienteId)
         {
             return await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Id == clienteId);
+        }
+
+        public async Task<Cliente?> ObterClientePorDocumentoAsync(string documento)
+        {
+            return await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Documento == documento);
         }
 
         public async Task<ICollection<Cliente>> ObterTodosClientesAsync()

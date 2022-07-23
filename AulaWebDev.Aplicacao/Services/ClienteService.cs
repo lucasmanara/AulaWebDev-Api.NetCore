@@ -26,7 +26,7 @@ namespace AulaWebDev.Aplicacao.Services
             if (!result.IsValid)
                 return ResultService.RequestError<ClienteDto>("Um ou mais erros foram encontrados", result);
 
-            var cliente = await _clienteRepository.ObterClientePorId(clienteDto.Id);
+            var cliente = await _clienteRepository.ObterClientePorIdAsync(clienteDto.Id);
             if (cliente == null)
                 return ResultService.Fail("Cliente nao encontrado");
 
@@ -59,7 +59,7 @@ namespace AulaWebDev.Aplicacao.Services
             if (clienteId == Guid.Empty)
                 return ResultService.Fail<ClienteDto>("Id do cliente deve ser informado");
 
-            var cliente = await _clienteRepository.ObterClientePorId(clienteId);
+            var cliente = await _clienteRepository.ObterClientePorIdAsync(clienteId);
             if (cliente == null)
                 return ResultService.Fail("Cliente nao encontrado");
 
@@ -74,7 +74,7 @@ namespace AulaWebDev.Aplicacao.Services
             if (clienteId == Guid.Empty)
                 return ResultService.Fail<ClienteDto>("Id do cliente deve ser informado");
 
-            var cliente = await _clienteRepository.ObterClientePorId(clienteId);
+            var cliente = await _clienteRepository.ObterClientePorIdAsync(clienteId);
             if (cliente == null)
                 return ResultService.Fail<ClienteDto>("Cliente nao encontrado");
 

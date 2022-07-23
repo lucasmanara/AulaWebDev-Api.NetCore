@@ -1,7 +1,11 @@
 using AulaWebDev.Infra.Dependencias;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMvc().AddJsonOptions(options => 
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
 
 builder.Services.AddControllers();
 builder.Services.AddLogging();
