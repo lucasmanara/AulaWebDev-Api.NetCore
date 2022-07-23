@@ -26,10 +26,14 @@ namespace AulaWebDev.Aplicacao.Services
             if (!result.IsValid)
                 return ResultService.RequestError<ClienteDto>("Um ou mais erros foram encontrados", result);
 
-            var clienteEditado = await _clienteRepository.EditarAsync(_mapper.Map<Cliente>(clienteDto));
-            var clienteDtoEditado = _mapper.Map<ClienteDto>(clienteEditado);
+            var cliente = await _clienteRepository.ObterClientePorId(clienteDto.Id);
+            if (cliente == null)
+                return ResultService.Fail("Cliente nao encontrado");
 
-            return ResultService.Ok(clienteDtoEditado);
+            if (await _clienteRepository.EditarAsync(_mapper.Map(clienteDto, cliente)))
+                return ResultService.Ok("Cliente editado com sucesso");
+
+            return ResultService.Fail("Ocorreu um erro ao editar o Cliente");
         }
 
         public async Task<ResultService<ClienteDto>> CriarAsync(ClienteDto clienteDto)
