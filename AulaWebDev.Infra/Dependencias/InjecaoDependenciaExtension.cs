@@ -17,6 +17,7 @@ namespace AulaWebDev.Infra.Dependencias
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
 
             return services;
         }

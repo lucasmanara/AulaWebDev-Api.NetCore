@@ -10,6 +10,7 @@ namespace AulaWebDev.Dominio.Mapeamentos
         {
             CreateMap<ClienteDto, Cliente>();
             CreateMap<ProdutoDto, Produto>();
+            CreateMap<PedidoResponseDto, Pedido>();
         }
     }
 }
