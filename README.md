@@ -15,3 +15,6 @@ Criar CRUD de Categoria, e relacionar com o produto e pedido
 Criar relacionamento de produto e pedido Many to Many, para que a gente consiga incluir mais de um produto no mesmo pedido
 
 Valor: 2 Pontos
+
+### Data de entrega:
+**Até 23/08/2022**
